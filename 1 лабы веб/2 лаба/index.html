@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Лаб 2 ФИО</title>
+  </head>
+  <body>
+    <p>
+      <a href="rad.html">Площадь круга</a>
+    </p>
+    <script>
+      let surname = prompt("Введите свою фамилию", "");
+
+      let sex = prompt("Введите свой пол", "");
+
+      let age = prompt("Введите свой возраст", "");
+
+      if (confirm(`ФИО: ${surname} \nПол: ${sex} \nВозраст: ${age}\nВсё верно?`)) {
+        alert(`Молодец, ${surname}`);
+      } else {
+        alert("Ошибка в данных");
+      }
+    </script>
+
+   
+  </body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>jQuery Практика - Скрытие и показ изображений</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+</head>
+<body>
+    <div class="section">
+        <h1>Практика jQuery</h1>
+        <div id="header">
+            <h2>Шапка сайта</h2>
+            <img src="https://i.pinimg.com/originals/48/54/2d/48542d3c7daaf1dd8b399a9c090feef7.jpg" alt="Логотип сайта" class="logo">
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Галерея мотоциклов</h2>
+        <button id="hideButton">Скрыть все изображения (кроме первого)</button>
+        <button id="showButton">Показать все изображения</button>
+        <div class="gallery">
+            <img src="https://myskillsconnect.com/uploads/posts/2023-06/1686672836_myskillsconnect-com-p-foto-nedorogikh-mototsiklov-35.jpg" alt="Мотоцикл 1">
+            <img src="https://avatars.mds.yandex.net/get-altay/965007/2a000001628855877644add2e3bb312e1463/XXL_height" alt="Мотоцикл 2">
+            <img src="https://motosport21.ru/image/catalog/motocikly/motocikl-nitro-200.jpg" alt="Мотоцикл 3">
+            <img src="https://avatars.mds.yandex.net/i?id=53989fc13929c8f3a76f9dd5574c1dc9_l-8456088-images-thumbs&n=13" alt="Мотоцикл 4">
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 id="mainHeading">Исходный текст заголовка</h2>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // 1. Изменение текста заголовка
+            $('#mainHeading').text('Текст изменен с помощью jQuery');
+            
+            // 2. Логотип просто появляется при загрузке (без предварительного hide)
+            $('.logo').show(1000);
+            
+            // 3. Функция для изменения атрибутов
+            function changeAttribute(elementId, attrName, newValue) {
+                $('#' + elementId).attr(attrName, newValue);
+                console.log('Изменен атрибут ' + attrName + ' элемента #' + elementId);
+            }
+            
+            // Пример использования функции
+            changeAttribute('mainHeading', 'title', 'Новый заголовок');
+            
+            // 4. Работа с первым изображением
+            $('.gallery img:first')
+                .css('border', '2px solid #333')
+                .animate({'border-width': '8px'}, 2000);
+            
+            // 5. Добавляем новый параграф
+            $('body').append(
+                $('<p>')
+                    .attr('id', 'newParagraph')
+                    .text('Это динамически добавленный параграф с помощью jQuery.')
+                    .css({
+                        'background-color': '#222',
+                        'color': 'white',
+                        'border-radius': '5px',
+                        'padding': '10px'
+                    })
+            );
+            
+            // 6. Обработчик кнопки для скрытия изображений (кроме первого)
+            $('#hideButton').click(function() {
+                $('.gallery img').not(':first').hide(1000);
+                $(this).prop('disabled', true);
+                $('#showButton').show();
+            });
+            
+            // 7. Обработчик кнопки для показа всех изображений
+            $('#showButton').click(function() {
+                $('.gallery img').show(1000);
+                $('#hideButton').prop('disabled', false);
+                $(this).hide();
+            });
+            
+            // 8. Логотип исчезает через 4 секунды после загрузки (один раз)
+            setTimeout(function() {
+                $('.logo').fadeOut(1000);
+            }, 4000);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Отпуска сотрудников</title>
+</head>
+<body>
+    <h1>Управление отпусками сотрудников</h1>
+    
+    <form id="employeesForm" class="section">
+        <h2>Введите данные сотрудников</h2>
+        <div id="employeesContainer">
+            <!-- Сотрудники будут добавляться здесь -->
+        </div>
+        <button type="button" onclick="addEmployee()">Добавить сотрудника</button>
+        <button type="button" onclick="calculateVacations()">Рассчитать отпуска</button>
+    </form>
+    
+    <div id="resultsSection" class="section" style="display: none;">
+        <h2>Результаты расчета отпусков</h2>
+        <table id="vacationsTable">
+            <thead>
+                <tr>
+                    <th>Фамилия</th>
+                    <th>Дата начала отпуска</th>
+                    <th>Дата окончания отпуска</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Данные будут добавлены JavaScript -->
+            </tbody>
+        </table>
+    </div>
+    
+    <form id="monthSearchForm" class="section">
+        <h2>Поиск по месяцу отпуска</h2>
+        <label for="monthSelect">Выберите месяц:</label>
+        <select id="monthSelect" name="month">
+            <option value="0">Январь</option>
+            <option value="1">Февраль</option>
+            <option value="2">Март</option>
+            <option value="3">Апрель</option>
+            <option value="4">Май</option>
+            <option value="5">Июнь</option>
+            <option value="6">Июль</option>
+            <option value="7">Август</option>
+            <option value="8">Сентябрь</option>
+            <option value="9">Октябрь</option>
+            <option value="10">Ноябрь</option>
+            <option value="11">Декабрь</option>
+        </select>
+        <button type="button" onclick="findByMonth()">Найти</button>
+        <div id="monthResult" class="result"></div>
+    </form>
+    
+    <form id="quarterSearchForm" class="section">
+        <h2>Поиск по кварталу окончания отпуска</h2>
+        <label for="quarterSelect">Выберите квартал:</label>
+        <select id="quarterSelect" name="quarter">
+            <option value="1">I квартал (январь-март)</option>
+            <option value="2">II квартал (апрель-июнь)</option>
+            <option value="3">III квартал (июль-сентябрь)</option>
+            <option value="4">IV квартал (октябрь-декабрь)</option>
+        </select>
+        <button type="button" onclick="findByQuarter()">Найти</button>
+        <div id="quarterResult" class="result"></div>
+    </form>
+    
+    <div class="section">
+        <h2>Сотрудники с отпуском в следующем году</h2>
+        <button type="button" onclick="findNextYear()">Показать</button>
+        <div id="nextYearResult" class="result"></div>
+    </div>
+
+    <script>
+        // Глобальная переменная для хранения данных об отпусках
+        let vacations = [];
+        
+        // Инициализация формы с сотрудниками
+        document.addEventListener('DOMContentLoaded', function() {
+            // Добавляем 7 сотрудников по умолчанию
+            for (let i = 0; i < 7; i++) {
+                addEmployee();
+            }
+        });
+        
+        // Функция добавления нового сотрудника в форму
+        function addEmployee() {
+            const container = document.getElementById('employeesContainer');
+            const employeeCount = container.children.length + 1;
+            
+            const employeeDiv = document.createElement('div');
+            employeeDiv.className = 'employee-row';
+            employeeDiv.innerHTML = `
+                <h3>Сотрудник ${employeeCount}</h3>
+                <label for="lastName${employeeCount}">Фамилия:</label>
+                <input type="text" id="lastName${employeeCount}" name="lastName${employeeCount}" required>
+                
+                <label for="contractDate${employeeCount}">Дата заключения контракта:</label>
+                <input type="date" id="contractDate${employeeCount}" name="contractDate${employeeCount}" required>
+            `;
+            
+            container.appendChild(employeeDiv);
+        }
+        
+        // Основная функция расчета отпусков
+        function calculateVacations() {
+            vacations = [];
+            const resultsSection = document.getElementById('resultsSection');
+            const vacationsTable = document.getElementById('vacationsTable').getElementsByTagName('tbody')[0];
+            const container = document.getElementById('employeesContainer');
+            
+            // Очищаем таблицу результатов
+            vacationsTable.innerHTML = '';
+            
+            // Собираем данные о сотрудниках
+            const employeeRows = container.children;
+            for (let i = 0; i < employeeRows.length; i++) {
+                const employeeNumber = i + 1;
+                const lastName = document.getElementById(`lastName${employeeNumber}`).value;
+                const contractDate = new Date(document.getElementById(`contractDate${employeeNumber}`).value);
+                
+                if (!lastName || isNaN(contractDate.getTime())) {
+                    alert('Пожалуйста, заполните все поля корректно!');
+                    return;
+                }
+                
+                // Рассчитываем дату начала отпуска (11 месяцев после контракта)
+                const vacationStart = new Date(contractDate);
+                vacationStart.setMonth(vacationStart.getMonth() + 11);
+                
+                // Рассчитываем дату окончания отпуска (24 календарных дня после начала)
+                const vacationEnd = addCalendarDays(vacationStart, 24);
+                
+                // Сохраняем данные
+                vacations.push({
+                    lastName: lastName,
+                    contractDate: contractDate,
+                    vacationStart: vacationStart,
+                    vacationEnd: vacationEnd
+                });
+                
+                // Добавляем строку в таблицу результатов
+                const row = vacationsTable.insertRow();
+                row.insertCell(0).textContent = lastName;
+                row.insertCell(1).textContent = formatDate(vacationStart);
+                row.insertCell(2).textContent = formatDate(vacationEnd);
+            }
+            
+            // Показываем секцию с результатами
+            resultsSection.style.display = 'block';
+        }
+        
+        // Функция добавления календарных дней (включая выходные)
+        function addCalendarDays(startDate, days) {
+            const result = new Date(startDate);
+            result.setDate(result.getDate() + days - 1); // -1 потому что день начала считается первым днем
+            return result;
+        }
+        
+        // Функция форматирования даты
+        function formatDate(date) {
+            const day = date.getDate().toString().padStart(2, '0');
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+            const year = date.getFullYear();
+            return `${day}.${month}.${year}`;
+        }
+        
+        // Поиск сотрудников с отпуском в заданном месяце
+        function findByMonth() {
+            const month = parseInt(document.getElementById('monthSelect').value);
+            const resultDiv = document.getElementById('monthResult');
+            
+            if (vacations.length === 0) {
+                resultDiv.textContent = 'Сначала рассчитайте отпуска!';
+                return;
+            }
+            
+            const filtered = vacations.filter(emp => emp.vacationStart.getMonth() === month);
+            
+            if (filtered.length === 0) {
+                resultDiv.textContent = 'Нет сотрудников с отпуском в выбранном месяце.';
+            } else {
+                resultDiv.innerHTML = '<strong>Сотрудники с отпуском в выбранном месяце:</strong><br>' + 
+                    filtered.map(emp => `${emp.lastName} (${formatDate(emp.vacationStart)} - ${formatDate(emp.vacationEnd)})`).join('<br>');
+            }
+        }
+        
+        // Поиск сотрудников с окончанием отпуска в заданном квартале
+        function findByQuarter() {
+            const quarter = parseInt(document.getElementById('quarterSelect').value);
+            const resultDiv = document.getElementById('quarterResult');
+            
+            if (vacations.length === 0) {
+                resultDiv.textContent = 'Сначала рассчитайте отпуска!';
+                return;
+            }
+            
+            const filtered = vacations.filter(emp => {
+                const month = emp.vacationEnd.getMonth();
+                const empQuarter = Math.floor(month / 3) + 1;
+                return empQuarter === quarter;
+            });
+            
+            if (filtered.length === 0) {
+                resultDiv.textContent = 'Нет сотрудников с окончанием отпуска в выбранном квартале.';
+            } else {
+                resultDiv.innerHTML = '<strong>Сотрудники с окончанием отпуска в выбранном квартале:</strong><br>' + 
+                    filtered.map(emp => `${emp.lastName} (${formatDate(emp.vacationEnd)})`).join('<br>');
+            }
+        }
+        
+        // Поиск сотрудников с отпуском в следующем году
+        function findNextYear() {
+            const resultDiv = document.getElementById('nextYearResult');
+            const currentYear = new Date().getFullYear();
+            
+            if (vacations.length === 0) {
+                resultDiv.textContent = 'Сначала рассчитайте отпуска!';
+                return;
+            }
+            
+            const filtered = vacations.filter(emp => emp.vacationStart.getFullYear() === currentYear + 1);
+            
+            if (filtered.length === 0) {
+                resultDiv.textContent = `Нет сотрудников с отпуском в ${currentYear + 1} году.`;
+            } else {
+                resultDiv.innerHTML = `<strong>Сотрудники с отпуском в ${currentYear + 1} году:</strong><br>` + 
+                    filtered.map(emp => `${emp.lastName} (${formatDate(emp.vacationStart)} - ${formatDate(emp.vacationEnd)})`).join('<br>');
+            }
+        }
+    </script>
+</body>
+</html>

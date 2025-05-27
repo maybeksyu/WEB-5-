@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сбор имен и фамилий</title>
+    <script>
+        function collectNames() {
+            let namesList = [];
+            let name;
+
+        
+            while (true) {
+                name = prompt("Введите фамилию и имя (или нажмите 'Отмена' для завершения):");
+                if (name === null) {
+                    break; 
+                }
+                namesList.push(name); 
+            }
+
+
+            document.getElementById("result").innerText = "Собранные имена и фамилии:\n" + namesList.join("\n");
+        }
+    </script>
+</head>
+<body>
+    <h1>Сбор имен и фамилий</h1>
+    <button onclick="collectNames()">Начать сбор</button>
+    <pre id="result"></pre> 
+</body>
+</html>

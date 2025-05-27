@@ -1,0 +1,70 @@
+<head>
+    <title>Позиционирование в CSS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="http://127.0.0.1:5500/2%20%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BF%D0%BE%D0%B7%D0%B8%D1%86%D0%B8%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5/practika24%20page.html">Страница 4</a></li>
+        <li><a href="http://127.0.0.1:5500/2%20%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BF%D0%BE%D0%B7%D0%B8%D1%86%D0%B8%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5/practika25page.html">Страница 5</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <!-- Рекламный блок (position: absolute) -->
+    <div class="ad-block">
+        <h3>Супер предложение!</h3>
+        <p>Купите сейчас и получите скидку 50%!</p>
+        <a href="https://www.autopriwos.by/catalogue-tires/audi/r8-4s/shinaleto/sku/54365775/index.html?yclid=1847474823543914495" class="ad-button">Узнать больше</a>
+    </div>
+
+    <h1>Margin</h1>
+<p>Краткая информация</p>
+    <table class="info-table">
+        <tr>
+            <th>Значение по умолчанию</th>
+            <td>0</td>
+        </tr>
+        <tr>
+            <th>Наследуется</th>
+            <td>Нет</td>
+        </tr>
+        <tr>
+            <th>Применяется</th>
+            <td>Ко всем элементам</td>
+        </tr>
+        <tr>
+            <th>Ссылка на спецификацию</th>
+            <td><a href="http://www.w3.org/TR/CSS21/box.html#propdef-margin">http://www.w3.org/TR/CSS21/box.html#propdef-margin</a></td>
+        </tr>
+    </table>
+    <p>Описание</p>
+    <h2>Свойство <font color=red>margin</font> задает поля (внешние отступы элемента) — отступы от внешней границы
+        элемента до границ родительского элемента или до соседних элементов (рис. 1).</h2>
+
+        <div class="image-wrapper">
+            <div class="image-container">
+                <img src="blochnayamodel.png" alt="Блочная модель CSS">
+                <p class="image-caption">Рисунок 1 - Блочная модель</p>
+            </div>
+            
+            <h2>Строчные элементы реагируют только на горизонтальные отступы.</h2>
+            
+            <p>Значения</p>
+            <h2>Разрешается использовать одно, два, три или четыре значения, разделяя их между собой пробелом:</h2>
+            <ol>
+                <li>Поля будут установлены одинаково от каждого края элемента (<code>margin: 10px</code>).</li>
+                <li>Первое значение устанавливает поле от верхнего и нижнего края, второе — от левого и правого (<code>margin: 5px 10px</code>).</li>
+                <li>Первое значение задает поле от верхнего края, второе — одновременно от левого и правого края, а третье — от нижнего края (<code>margin: 5px 10px 15px</code>).</li>
+                <li>Первое значение задает поле от верхнего края, второе — одновременно от левого и правого края, а третье — от нижнего края (<code>margin: 5px 10px 15px 20px</code>).</li>
+            </ol>
+        </div>
+
+    <p><font color=purple size=2>Возможные значения: одно, два, три или четыре следующих значения: ширина (задается в стандартных единицах
+        длины), процент % (задается процент от родительского элемента), <code>auto</code> (расстояние будет рассчитываться
+        браузером автоматически).</font></p>
+</div>
+
+</body>
+</html>

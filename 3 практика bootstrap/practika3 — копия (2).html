@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интернет-магазин</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- Навигационное меню -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Магазин техники</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Главная</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Каталог
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Наушники</a></li>
+                        <li><a class="dropdown-item" href="#">Мышки</a></li>
+                        <li><a class="dropdown-item" href="#">Телефоны</a></li>
+                        <li><a class="dropdown-item" href="#">Ноутбуки</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Все товары</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Акции</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">О нас</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Контакты</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid mt-3">
+    <!-- Баннер -->
+    <div class="row">
+        <div class="col-12">
+            <div class="banner text-center">
+                <h2>Специальное предложение!</h2>
+                <p>Скидки до 30% на все смартфоны этой недели</p>
+                <button class="btn btn-light">Подробнее</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Строка с карточками товаров -->
+    <div class="row">
+        <div class="col-12">
+            <div class="products-row">
+                <!-- Карточка товара 1 -->
+                <div class="product-col">
+                    <div class="card product-card h-100">
+                        <img src="https://main-cdn.sbermegamarket.ru/big2/hlr-system/-15/070/641/406/261/034/100069136733b1.jpg" class="card-img-top product-img" alt="Ноутбук">
+                        <div class="card-body">
+                            <h5 class="card-title">Ноутбук UltraBook</h5>
+                            <p class="card-text">15.6", i7, 16GB RAM, 512GB SSD</p>
+                            <div class="d-flex justify-content-between align-items-center mt-auto">
+                                <span class="h5 text-primary">2500 BYN</span>
+                                <button class="btn btn-primary">Купить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Карточка товара 2 -->
+                <div class="product-col">
+                    <div class="card product-card h-100">
+                        <img src="https://i.ebayimg.com/images/g/P9UAAOSwgGJeNtZM/s-l600.jpg" class="card-img-top product-img" alt="Наушники">
+                        <div class="card-body">
+                            <h5 class="card-title">Беспроводные наушники</h5>
+                            <p class="card-text">Bluetooth 5.0, ANC, 30ч работы</p>
+                            <div class="d-flex justify-content-between align-items-center mt-auto">
+                                <span class="h5 text-primary">400 BYN</span>
+                                <button class="btn btn-primary">Купить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Карточка товара 3 -->
+                <div class="product-col">
+                    <div class="card product-card h-100">
+                        <img src="https://a.allegroimg.com/s720/119c19/57e192334335b8ddf88c770aaff5/Smart-TV-Hisense-75A7KQ-4K-Ultra-HD-QLED-75-quo" class="card-img-top product-img" alt="Телевизор">
+                        <div class="card-body">
+                            <h5 class="card-title">Телевизор 4K UHD</h5>
+                            <p class="card-text">55", Smart TV, HDR, 120Hz</p>
+                            <div class="d-flex justify-content-between align-items-center mt-auto">
+                                <span class="h5 text-primary">12000 BYN</span>
+                                <button class="btn btn-primary">Купить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Подвал -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <h5>О магазине</h5>
+                <p>Мы предлагаем лучшую технику по доступным ценам с гарантией качества.</p>
+            </div>
+        </div>
+        <div class="text-center mt-3">
+            <p>© 2023 Магазин техники. Все права защищены.</p>
+        </div>
+    </div>
+</footer>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

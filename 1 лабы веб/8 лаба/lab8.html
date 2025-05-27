@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Решение задач по DOM с jQuery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 5px;
+        }
+        .result {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-top: 10px;
+            border-left: 4px solid #4CAF50;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 15px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .highlight {
+            background-color: #ffeb3b;
+        }
+        img {
+            max-width: 100px;
+            margin: 5px;
+            border: 1px solid #ddd;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Решение задач по работе с DOM (jQuery версия)</h1>
+
+    <!-- Тестовые данные -->
+    <div class="section">
+        <h2>Тестовые данные</h2>
+        
+        <div id="moto_models">
+            <h3>Модели мотоциклов</h3>
+            <ul>
+                <li>Honda CB500F мотоцикл</li>
+                <li>Yamaha MT-07</li>
+                <li>Kawasaki Ninja 400 мотоцикл</li>
+                <li>Suzuki GSX-S750</li>
+                <li>BMW R1250GS мотоцикл</li>
+                <li>Ducati Monster</li>
+                <li>Harley-Davidson мотоцикл Sportster</li>
+            </ul>
+        </div>
+
+        <div id="forfooter">
+            <h3>Логотипы производителей</h3>
+            <img src="https://pubimg.nodacdn.net/images/default/desktop/ru_RU/1096e491349a9f4c68dc5b0dcf6ef58a5d.png" title="Производители">
+            <img src="https://a.d-cd.net/gwAAAgEk_eA-1920.jpg" title="Логотип">
+            <img src="https://i.pinimg.com/736x/42/be/af/42beaf79288d33966a0ee6f0c7d244fb.jpg" title="Производители">
+            <img src="https://i.pinimg.com/originals/d4/3e/af/d43eaffcffd39e866471e987f200a208.png" title="Логотип">
+            <img src="https://cdn.worldvectorlogo.com/logos/suzuki-4.svg" title="Производители">
+        </div>
+
+        <table id="moto_table">
+            <caption>Характеристики мотоциклов</caption>
+            <tr>
+                <th>Модель</th>
+                <th>Год</th>
+                <th>Объем двигателя</th>
+                <th>Мощность</th>
+            </tr>
+            <tr>
+                <td>Honda CB500F</td>
+                <td>2022</td>
+                <td>500cc</td>
+                <td>47 л.с.</td>
+            </tr>
+            <tr>
+                <td>Yamaha MT-07</td>
+                <td>2021</td>
+                <td>689cc</td>
+                <td>74 л.с.</td>
+            </tr>
+            <tr>
+                <td>Kawasaki Ninja 400</td>
+                <td>2023</td>
+                <td>399cc</td>
+                <td>45 л.с.</td>
+            </tr>
+            <tr>
+                <td>Suzuki GSX-S750</td>
+                <td>2020</td>
+                <td>749cc</td>
+                <td>114 л.с.</td>
+            </tr>
+            <tr>
+                <td>BMW R1250GS</td>
+                <td>2022</td>
+                <td>1254cc</td>
+                <td>136 л.с.</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Результаты выполнения -->
+    <div class="section">
+        <h2>Результаты выполнения</h2>
+        
+        <div id="task1" class="task">
+            <h3>1. Элементы li внутри #moto_models с текстом "мотоцикл"</h3>
+            <div id="result1" class="result"></div>
+        </div>
+
+        <div id="task2" class="task">
+            <h3>2. Картинки внутри #forfooter с title="Производители"</h3>
+            <div id="result2" class="result"></div>
+        </div>
+
+        <div id="task3" class="task">
+            <h3>3. Последние ячейки в четных строках таблицы #moto_table</h3>
+            <div id="result3" class="result"></div>
+        </div>
+    </div>
+    <script src="java.js"></script>
+</body>
+</html>

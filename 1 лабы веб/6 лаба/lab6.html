@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Меню "Писатели" с указателем-ручкой</title>
+</head>
+<body>
+    <div class="menu-container">
+        <div class="menu">
+            <div class="menu-item active" data-writer="pushkin">А.С. Пушкин</div>
+            <div class="menu-item" data-writer="tolstoy">Л.Н. Толстой</div>
+            <div class="menu-item" data-writer="dostoevsky">Ф.М. Достоевский</div>
+            <div class="menu-item" data-writer="chekhov">А.П. Чехов</div>
+            <div class="menu-item" data-writer="gogol">Н.В. Гоголь</div>
+        </div>
+
+        <div class="content">
+            <h2 class="writer-title">А.С. Пушкин</h2>
+            
+            <div class="image-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Kiprensky_Pushkin.jpg" alt="Пушкин" class="writer-image active" data-writer="pushkin">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Pushkin_Signature.svg/1920px-Pushkin_Signature.svg.png" alt="Подпись Пушкина" class="writer-image" data-writer="pushkin">
+                
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Lev_Nikolayevich_Tolstoy_in_1910_by_Vladimir_Chertkov.jpg/500px-Lev_Nikolayevich_Tolstoy_in_1910_by_Vladimir_Chertkov.jpg" alt="Толстой" class="writer-image" data-writer="tolstoy">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Lev_Tolstoy_Signature_Russian.svg/1920px-Lev_Tolstoy_Signature_Russian.svg.png" alt="Подпись Толстого" class="writer-image" data-writer="tolstoy">
+                
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Vasily_Perov_-_%D0%9F%D0%BE%D1%80%D1%82%D1%80%D0%B5%D1%82_%D0%A4.%D0%9C.%D0%94%D0%BE%D1%81%D1%82%D0%BE%D0%B5%D0%B2%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_-_Google_Art_Project.jpg/500px-Vasily_Perov_-_%D0%9F%D0%BE%D1%80%D1%82%D1%80%D0%B5%D1%82_%D0%A4.%D0%9C.%D0%94%D0%BE%D1%81%D1%82%D0%BE%D0%B5%D0%B2%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_-_Google_Art_Project.jpg" alt="Достоевский" class="writer-image" data-writer="dostoevsky">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Fyodor_Dostoyevsky_Signature.svg/1920px-Fyodor_Dostoyevsky_Signature.svg.png" alt="Подпись Достоевского" class="writer-image" data-writer="dostoevsky">
+                
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/%D0%90._%D0%9F._%D0%A7%D0%B5%D1%85%D0%BE%D0%B2%2C_%D0%AF%D0%BB%D1%82%D0%B0.jpg/500px-%D0%90._%D0%9F._%D0%A7%D0%B5%D1%85%D0%BE%D0%B2%2C_%D0%AF%D0%BB%D1%82%D0%B0.jpg" alt="Чехов" class="writer-image" data-writer="chekhov">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/%D0%9F%D0%BE%D0%B4%D0%BF%D0%B8%D1%81%D1%8C_%D0%90%D0%BD%D1%82%D0%BE%D0%BD_%D0%A7%D0%B5%D1%85%D0%BE%D0%B2.png" class="writer-image" data-writer="chekhov">
+                
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/N.Gogol_by_F.Moller_%281840%2C_Tretyakov_gallery%29.jpg/500px-N.Gogol_by_F.Moller_%281840%2C_Tretyakov_gallery%29.jpg" alt="Гоголь" class="writer-image" data-writer="gogol">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Nikolai_Gogol_Signature.svg/1920px-Nikolai_Gogol_Signature.svg.png" alt="Подпись Гоголя" class="writer-image" data-writer="gogol">
+            </div>
+            
+            <div class="controls">
+                <button id="startBtn">Начать снова</button>
+                <button id="stopBtn">Остановить</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Глобальные переменные
+        let currentWriter = 'pushkin';
+        let currentImageIndex = 0;
+        let slideInterval;
+        const intervalTime = 2000; // 2 секунды
+        
+        // Основная функция инициализации
+        function init() {
+            setupMenu();
+            setupControls();
+            startSlideshow();
+        }
+        
+        // Настройка меню
+        function setupMenu() {
+            const menuItems = document.querySelectorAll('.menu-item');
+            
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Удаляем активный класс у всех пунктов
+                    menuItems.forEach(i => i.classList.remove('active'));
+                    // Добавляем активный класс текущему пункту
+                    this.classList.add('active');
+                    
+                    // Получаем выбранного писателя
+                    currentWriter = this.getAttribute('data-writer');
+                    currentImageIndex = 0;
+                    
+                    // Обновляем заголовок
+                    document.querySelector('.writer-title').textContent = this.textContent;
+                    
+                    // Показываем соответствующие изображения
+                    updateDisplayedImages();
+                    
+                    // Перезапускаем слайд-шоу
+                    restartSlideshow();
+                });
+            });
+        }
+        
+        // Настройка элементов управления
+        function setupControls() {
+            document.getElementById('startBtn').addEventListener('click', startSlideshow);
+            document.getElementById('stopBtn').addEventListener('click', stopSlideshow);
+        }
+        
+        // Функция обновления отображаемых изображений
+        function updateDisplayedImages() {
+            const writerImages = document.querySelectorAll('.writer-image');
+            
+            // Скрываем все изображения
+            writerImages.forEach(img => img.classList.remove('active'));
+            
+            // Получаем все изображения для текущего писателя
+            const currentWriterImages = Array.from(writerImages).filter(
+                img => img.getAttribute('data-writer') === currentWriter
+            );
+            
+            // Показываем текущее изображение
+            if (currentWriterImages.length > 0) {
+                currentWriterImages[currentImageIndex].classList.add('active');
+            }
+        }
+        
+        // Переход к следующему изображению
+        function nextImage() {
+            const writerImages = document.querySelectorAll('.writer-image');
+            const currentWriterImages = Array.from(writerImages).filter(
+                img => img.getAttribute('data-writer') === currentWriter
+            );
+            
+            if (currentWriterImages.length > 0) {
+                currentImageIndex = (currentImageIndex + 1) % currentWriterImages.length;
+                updateDisplayedImages();
+            }
+        }
+        
+        // Запуск слайд-шоу
+        function startSlideshow() {
+            stopSlideshow();
+            slideInterval = setInterval(nextImage, intervalTime);
+        }
+        
+        // Остановка слайд-шоу
+        function stopSlideshow() {
+            clearInterval(slideInterval);
+        }
+        
+        // Перезапуск слайд-шоу
+        function restartSlideshow() {
+            stopSlideshow();
+            startSlideshow();
+        }
+        
+        // Запускаем при загрузке страницы
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+body {
+    text-align: right;
+    color: blue;
+    font-style: italic;
+    font-size: 1.2em;
+}
+
+h1 {
+    text-align: center;
+    color: red;
+}
+
+img {
+    display: block;
+    margin: 0 auto;
+}
+
+table {
+    margin-left: auto;
+    margin-right: 0;
+    border: 3px solid black;
+    border-spacing: 4px; 
+
+}
+
+ul {
+    list-style-type: circle; 
+    padding-right: 20px; 
+    margin: 0; 
+    display: inline-block;
+    text-align: right;
+}
+
+li {
+    padding-left: 20px; 
+    text-align: left;
+}
+
+
+th, td {
+    border: 1px solid black; 
+    padding: 8px; 
+}
+
+th {
+    background-color: aquamarine; 
+}

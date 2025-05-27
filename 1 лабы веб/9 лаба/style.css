@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    line-height: 1.6;
+}
+.section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
+h1, h2 {
+    color: #333;
+}
+.gallery {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin: 15px 0;
+}
+.gallery img {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+    transition: opacity 0.5s;
+}
+/* Стили для логотипа */
+.logo {
+    width: 120px;
+    height: auto;
+    display: block;
+    margin-top: 10px;
+}
+#newParagraph {
+    margin-top: 20px;
+    padding: 15px;
+}
+#hideButton, #showButton {
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 15px;
+    margin-right: 10px;
+}
+#hideButton {
+    background-color: #4CAF50;
+}
+#hideButton:hover {
+    background-color: #45a049;
+}
+#showButton {
+    background-color: #f44336;
+    display: none;
+}
+#showButton:hover {
+    background-color: #d32f2f;
+}
